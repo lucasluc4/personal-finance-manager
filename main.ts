@@ -87,22 +87,116 @@ class SampleSettingTab extends PluginSettingTab {
 				})
 			);
 
-		const normalizedDefaultAssetFolder = normalizePath(DEFAULT_SETTINGS.assetFolder);
 		new Setting(containerEl)
 			.setName('Assets folder')
-			.setDesc("Default folder is " + normalizedDefaultAssetFolder)
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.assetFolder)
 			.addText(text => {
 
 				new FolderSuggest(text.inputEl, this.app, async (value) => {
 					text.setValue(value);
-					this.plugin.settings.assetFolder = value || normalizedDefaultAssetFolder;
+					this.plugin.settings.assetFolder = value || DEFAULT_SETTINGS.assetFolder;
 					await this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.assetFolder);
 
-				return text.setPlaceholder(normalizedDefaultAssetFolder).onChange(async (value) => {
-					this.plugin.settings.assetFolder = value || normalizedDefaultAssetFolder;
+				return text.setPlaceholder(DEFAULT_SETTINGS.assetFolder).onChange(async (value) => {
+					this.plugin.settings.assetFolder = value || DEFAULT_SETTINGS.assetFolder;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		new Setting(containerEl)
+			.setName('Patrimony folder')
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.patrimonyFolder)
+			.addText(text => {
+
+				new FolderSuggest(text.inputEl, this.app, async (value) => {
+					text.setValue(value);
+					this.plugin.settings.patrimonyFolder = value || DEFAULT_SETTINGS.patrimonyFolder;
+					await this.plugin.saveSettings();
+				});
+
+				text.setValue(this.plugin.settings.patrimonyFolder);
+
+				return text.setPlaceholder(DEFAULT_SETTINGS.patrimonyFolder).onChange(async (value) => {
+					this.plugin.settings.patrimonyFolder = value || DEFAULT_SETTINGS.patrimonyFolder;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		new Setting(containerEl)
+			.setName('Transactions folder')
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.transactionsFolder)
+			.addText(text => {
+
+				new FolderSuggest(text.inputEl, this.app, async (value) => {
+					text.setValue(value);
+					this.plugin.settings.transactionsFolder = value || DEFAULT_SETTINGS.transactionsFolder;
+					await this.plugin.saveSettings();
+				});
+
+				text.setValue(this.plugin.settings.transactionsFolder);
+
+				return text.setPlaceholder(DEFAULT_SETTINGS.transactionsFolder).onChange(async (value) => {
+					this.plugin.settings.transactionsFolder = value || DEFAULT_SETTINGS.transactionsFolder;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		new Setting(containerEl)
+			.setName('Reserve Accounts folder')
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveAccountsFolder)
+			.addText(text => {
+
+				new FolderSuggest(text.inputEl, this.app, async (value) => {
+					text.setValue(value);
+					this.plugin.settings.reserveAccountsFolder = value || DEFAULT_SETTINGS.reserveAccountsFolder;
+					await this.plugin.saveSettings();
+				});
+
+				text.setValue(this.plugin.settings.reserveAccountsFolder);
+
+				return text.setPlaceholder(DEFAULT_SETTINGS.reserveAccountsFolder).onChange(async (value) => {
+					this.plugin.settings.reserveAccountsFolder = value || DEFAULT_SETTINGS.reserveAccountsFolder;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		new Setting(containerEl)
+			.setName('Reserve Transactions folder')
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveTransactionFolder)
+			.addText(text => {
+
+				new FolderSuggest(text.inputEl, this.app, async (value) => {
+					text.setValue(value);
+					this.plugin.settings.reserveTransactionFolder = value || DEFAULT_SETTINGS.reserveTransactionFolder;
+					await this.plugin.saveSettings();
+				});
+
+				text.setValue(this.plugin.settings.reserveTransactionFolder);
+
+				return text.setPlaceholder(DEFAULT_SETTINGS.reserveTransactionFolder).onChange(async (value) => {
+					this.plugin.settings.reserveTransactionFolder = value || DEFAULT_SETTINGS.reserveTransactionFolder;
+					await this.plugin.saveSettings();
+				});
+			});
+
+		new Setting(containerEl)
+			.setName('Accounting folder')
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.accountingFolder)
+			.addText(text => {
+
+				new FolderSuggest(text.inputEl, this.app, async (value) => {
+					text.setValue(value);
+					this.plugin.settings.accountingFolder = value || DEFAULT_SETTINGS.accountingFolder;
+					await this.plugin.saveSettings();
+				});
+
+				text.setValue(this.plugin.settings.accountingFolder);
+
+				return text.setPlaceholder(DEFAULT_SETTINGS.accountingFolder).onChange(async (value) => {
+					this.plugin.settings.accountingFolder = value || DEFAULT_SETTINGS.accountingFolder;
 					await this.plugin.saveSettings();
 				});
 			});
