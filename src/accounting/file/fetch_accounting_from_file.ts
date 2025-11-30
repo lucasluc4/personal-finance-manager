@@ -96,7 +96,7 @@ export class FetchAccountingFromFile {
 	}
 
 	fetchPatrimony(period: string): PatrimonyResult {
-		const patrimonyPath = this.plugin.settings.accountingFolder;
+		const patrimonyPath = this.plugin.settings.patrimonyFolder;
 		const folder = this.plugin.app.vault.getFolderByPath(
 			normalizePath(patrimonyPath + "/" + period.replace("-", "/")));
 

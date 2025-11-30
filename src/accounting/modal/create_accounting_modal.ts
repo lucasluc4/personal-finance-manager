@@ -19,7 +19,7 @@ export class CreateAccountingModal extends Modal {
 		});
 
 		const calculateAccounting = () => {
-			return new AccountingCalculator(plugin.app).calculate(period);
+			return new AccountingCalculator(plugin).calculate(period);
 		}
 
 		new FinanceFileCreationButtonDecorator(plugin.settings).include(this, calculateAccounting,
