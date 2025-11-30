@@ -28,7 +28,8 @@ export class AddReserveTransactionModal extends Modal {
 		const defaultReserveAccount: ReserveAccount = new ReserveAccount("Default", 0, "Default reserve account", true);
 		currentAccounts.push(defaultReserveAccount);
 
-		const folder = this.app.vault.getFolderByPath(normalizePath("finance/reserve_accounts"));
+		const reserveAccountsPath = plugin.settings.reserveAccountsFolder;
+		const folder = this.app.vault.getFolderByPath(normalizePath(reserveAccountsPath));
 		folder?.children.forEach((child) => {
 			if (child instanceof TFile && child.extension === "md") {
 				const assetFile = child as TFile;

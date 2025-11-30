@@ -23,7 +23,7 @@ export class AddPatrimonyModal extends Modal {
 			period = newPeriod;
 		});
 
-		new AssetPickerDecorator().include(this, (newAsset) => {
+		new AssetPickerDecorator().include(this, plugin.settings, (newAsset) => {
 			asset = newAsset;
 		});
 
