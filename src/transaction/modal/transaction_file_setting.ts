@@ -37,7 +37,7 @@ export class TransactionFileSetting implements FinanceFileSetting<TransactionFil
 	}
 
 	getPath(value: TransactionFileParameter, settings: FinanceManagerPluginSettings): string {
-		return normalizePath(settings.transactionsFolder + value.getPeriod().replace("-", "/"));
+		return normalizePath(settings.transactionsFolder + "/" + value.getPeriod().replace("-", "/"));
 	}
 
 	validate(value: TransactionFileParameter): boolean {

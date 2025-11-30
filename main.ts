@@ -77,7 +77,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Language')
-			.setDesc("This sets the language in Modals and Commands but won't change field names in generated files")
+			.setDesc("This sets the language in Modals and Commands but won't change field names in generated files. After changing the language, it is recommended to reload the obsidian app.")
 			.addDropdown(dropdown => dropdown
 				.addOption("en-US", "en-US")
 				.setValue(this.plugin.settings.language)
@@ -89,7 +89,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Assets folder')
-			.setDesc("Default folder is " + DEFAULT_SETTINGS.assetFolder)
+			.setDesc("Default folder is " + DEFAULT_SETTINGS.assetFolder + ". After changing this path or any of the paths below, it is necessary to manually move all existing files in the old folder to the new one. Otherwise, the plugin will lost track of not migrated entries.")
 			.addText(text => {
 
 				new FolderSuggest(text.inputEl, this.app, async (value) => {

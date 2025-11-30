@@ -14,7 +14,7 @@ export class PatrimonyFileSetting implements FinanceFileSetting<PatrimonyFilePar
 	}
 
 	getPath(value: PatrimonyFileParameter, settings: FinanceManagerPluginSettings): string {
-		return normalizePath(settings.patrimonyFolder + value.getPeriod().replace("-", "/"));
+		return normalizePath(settings.patrimonyFolder + "/" + value.getPeriod().replace("-", "/"));
 	}
 
 	getFileName(value: PatrimonyFileParameter, settings: FinanceManagerPluginSettings): string {

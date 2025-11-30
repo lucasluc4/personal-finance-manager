@@ -20,7 +20,7 @@ export class ReserveTransactionFileSetting implements FinanceFileSetting<Reserve
 	}
 
 	getPath(value: ReserveTransactionFileParameter, settings: FinanceManagerPluginSettings): string {
-		return normalizePath(settings.reserveTransactionFolder + value.getPeriod().replace("-", "/"));
+		return normalizePath(settings.reserveTransactionFolder + "/" + value.getPeriod().replace("-", "/"));
 	}
 
 	getFileName(value: ReserveTransactionFileParameter, settings: FinanceManagerPluginSettings): string {

@@ -1,4 +1,4 @@
-import {Modal, Notice, Setting} from "obsidian";
+import {Modal, Notice, Setting, normalizePath} from "obsidian";
 import {FinanceFileSetting} from "./file/finance_file_setting";
 
 import { FinanceManagerPluginSettings } from 'main';
@@ -26,9 +26,9 @@ export class FinanceFileCreationButtonDecorator<K> {
 
 						const fileContent = financeFileSetting.getFileContent(value);
 
-						const path = financeFileSetting.getPath(value, this.settings);
+						const path = normalizePath(financeFileSetting.getPath(value, this.settings));
 						const fileName = financeFileSetting.getFileName(value, this.settings);
-						const filePath = path + "/" + fileName;
+						const filePath = normalizePath(path + "/" + fileName);
 
 						try {
 
