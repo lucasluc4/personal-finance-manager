@@ -1,7 +1,7 @@
 {
 	"id": "personal-finance-manager",
 	"name": "Personal Finance Manager",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"minAppVersion": "0.15.0",
 	"description": "Plugin for a personal financial management framework.",
 	"author": "Lucas Maia",
