@@ -1,6 +1,7 @@
 import { Notice, normalizePath } from 'obsidian';
 import { FinanceFileSetting } from "src/general/modal_decorator/file/finance_file_setting";
 import { ReserveAccount } from "../reserve_account";
+import { FinanceManagerPluginSettings } from "main";
 
 export class ReserveAccountFileSettings implements FinanceFileSetting<ReserveAccount> {
 
@@ -12,12 +13,12 @@ export class ReserveAccountFileSettings implements FinanceFileSetting<ReserveAcc
 		return true;
 	}
 
-	getFileName(value: ReserveAccount): string {
+	getFileName(value: ReserveAccount, settings: FinanceManagerPluginSettings): string {
 		return value.getName() + ".md";
 	}
 
-	getPath(value: ReserveAccount): string {
-		return normalizePath("finance/reserve_accounts");
+	getPath(value: ReserveAccount, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.reserveAccountsFolder);
 	}
 
 	getFileContent(value: ReserveAccount): string {

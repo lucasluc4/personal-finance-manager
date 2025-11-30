@@ -5,7 +5,7 @@ import { FolderSuggest } from "src/settings/folder_suggest";
 
 // Remember to rename these classes and interfaces!
 
-interface FinanceManagerPluginSettings {
+export interface FinanceManagerPluginSettings {
 	language: string;
 	assetFolder: string;
 	patrimonyFolder: string;
@@ -35,7 +35,7 @@ export default class FinanceManagerPlugin extends Plugin {
 		new PluginActionCommandDecorator().include(this);
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new PersonalFinanceSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -60,7 +60,7 @@ export default class FinanceManagerPlugin extends Plugin {
 	}
 }
 
-class SampleSettingTab extends PluginSettingTab {
+class PersonalFinanceSettingTab extends PluginSettingTab {
 	plugin: FinanceManagerPlugin;
 	app: App;
 

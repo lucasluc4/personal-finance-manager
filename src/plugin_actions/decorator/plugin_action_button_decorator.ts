@@ -1,11 +1,11 @@
-import { Plugin } from 'obsidian';
+import FinanceManagerPlugin from "main";
 import { EntryOptionsModal } from "../modal/entry_options_modal";
 
 export class PluginActionButtonDecorator {
 
-	include(plugin: Plugin) {
+	include(plugin: FinanceManagerPlugin) {
 		const ribbonIconEl = plugin.addRibbonIcon('piggy-bank', 'Add finance entry', (evt: MouseEvent) => {
-			new EntryOptionsModal(plugin.app).open();
+			new EntryOptionsModal(plugin).open();
 		});
 
 		// Perform additional things with the ribbon

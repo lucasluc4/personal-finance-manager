@@ -1,6 +1,7 @@
 import { App, Notice, normalizePath } from 'obsidian';
 import { FinanceFileSetting } from "src/general/modal_decorator/file/finance_file_setting";
 import { ReserveTransactionFileParameter } from "./reserve_transaction_file_parameter";
+import { FinanceManagerPluginSettings } from "main";
 
 export class ReserveTransactionFileSetting implements FinanceFileSetting<ReserveTransactionFileParameter> {
 
@@ -18,18 +19,18 @@ export class ReserveTransactionFileSetting implements FinanceFileSetting<Reserve
 		return true;
 	}
 
-	getPath(value: ReserveTransactionFileParameter): string {
-		return normalizePath("finance/reserve_transaction/" + value.getPeriod().replace("-", "/"));
+	getPath(value: ReserveTransactionFileParameter, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.reserveTransactionFolder + value.getPeriod().replace("-", "/"));
 	}
 
-	getFileName(value: ReserveTransactionFileParameter): string {
+	getFileName(value: ReserveTransactionFileParameter, settings: FinanceManagerPluginSettings): string {
 		let num = 1;
 		while (true) {
 			const fileName = value.getReserveAccount().getName()
 				+ " - " + value.getType().toString()
 				+ " " + num
 				+ ".md";
-			const fullPath = this.getPath(value) + "/" + fileName;
+			const fullPath = this.getPath(value, settings) + "/" + fileName;
 			const existingFile = this.app.vault.getAbstractFileByPath(fullPath);
 			if (!existingFile) {
 				return fileName;

@@ -1,5 +1,5 @@
 import {EntryOptionType} from "./entry_option_type";
-import {App} from 'obsidian';
+import FinanceManagerPlugin from 'main';
 
 import {AddAssetModal} from "src/asset/modal/add_asset_modal";
 import {AddPatrimonyModal} from "src/patrimony/modal/add_patrimony_modal";
@@ -9,10 +9,10 @@ import {AddReserveTransactionModal} from "../reserve_transaction/modal/add_reser
 import {CreateAccountingModal} from "../accounting/modal/create_accounting_modal";
 
 export class EntryModalMap {
-	private readonly app: App;
+	private readonly plugin: FinanceManagerPlugin;
 
-	constructor(app: App) {
-		this.app = app;
+	constructor(plugin: FinanceManagerPlugin) {
+		this.plugin = plugin;
 	}
 
 	getRegisteredTypes(): EntryOptionType[] {
@@ -29,17 +29,17 @@ export class EntryModalMap {
 	getModal(type: EntryOptionType) {
 		switch (type) {
 			case EntryOptionType.AddAsset:
-				return new AddAssetModal(this.app);
+				return new AddAssetModal(this.plugin);
 			case EntryOptionType.AddPatrimony:
-				return new AddPatrimonyModal(this.app);
+				return new AddPatrimonyModal(this.plugin);
 			case EntryOptionType.AddTransaction:
-				return new AddTransactionModal(this.app);
+				return new AddTransactionModal(this.plugin);
 			case EntryOptionType.AddReserveAccount:
-				return new AddReserveAccountModal(this.app);
+				return new AddReserveAccountModal(this.plugin);
 			case EntryOptionType.AddReserveTransaction:
-				return new AddReserveTransactionModal(this.app);
+				return new AddReserveTransactionModal(this.plugin);
 			case EntryOptionType.CreateAccounting:
-				return new CreateAccountingModal(this.app);
+				return new CreateAccountingModal(this.plugin);
 		}
 	}
 }

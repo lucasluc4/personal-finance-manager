@@ -1,6 +1,7 @@
 import { App, Notice, normalizePath } from 'obsidian';
 import { FinanceFileSetting } from "src/general/modal_decorator/file/finance_file_setting";
 import { TransactionFileParameter } from "./transaction_file_parameter";
+import { FinanceManagerPluginSettings } from "main";
 
 export class TransactionFileSetting implements FinanceFileSetting<TransactionFileParameter> {
 
@@ -19,14 +20,14 @@ export class TransactionFileSetting implements FinanceFileSetting<TransactionFil
 			value.getDescription() + "\n";
 	}
 
-	getFileName(value: TransactionFileParameter): string {
+	getFileName(value: TransactionFileParameter, settings: FinanceManagerPluginSettings): string {
 		let num = 1;
 		while (true) {
 			const fileName = value.getAsset().getName()
 				+ " - " + value.getTransactionType().toString()
 				+ " " + num
 				+ ".md";
-			const fullPath = this.getPath(value) + "/" + fileName;
+			const fullPath = this.getPath(value, settings) + "/" + fileName;
 			const existingFile = this.app.vault.getAbstractFileByPath(fullPath);
 			if (!existingFile) {
 				return fileName;
@@ -35,8 +36,8 @@ export class TransactionFileSetting implements FinanceFileSetting<TransactionFil
 		}
 	}
 
-	getPath(value: TransactionFileParameter): string {
-		return normalizePath("finance/transaction/" + value.getPeriod().replace("-", "/"));
+	getPath(value: TransactionFileParameter, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.transactionsFolder + value.getPeriod().replace("-", "/"));
 	}
 
 	validate(value: TransactionFileParameter): boolean {

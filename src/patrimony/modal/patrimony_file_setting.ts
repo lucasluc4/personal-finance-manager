@@ -1,6 +1,7 @@
 import { Notice, normalizePath } from "obsidian";
 import { PatrimonyFileParameter } from "./patrimony_file_parameter";
 import { FinanceFileSetting } from "src/general/modal_decorator/file/finance_file_setting";
+import { FinanceManagerPluginSettings } from "main";
 
 export class PatrimonyFileSetting implements FinanceFileSetting<PatrimonyFileParameter> {
 
@@ -12,11 +13,11 @@ export class PatrimonyFileSetting implements FinanceFileSetting<PatrimonyFilePar
 		return true;
 	}
 
-	getPath(value: PatrimonyFileParameter): string {
-		return normalizePath("finance/patrimony/" + value.getPeriod().replace("-", "/"));
+	getPath(value: PatrimonyFileParameter, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.patrimonyFolder + value.getPeriod().replace("-", "/"));
 	}
 
-	getFileName(value: PatrimonyFileParameter): string {
+	getFileName(value: PatrimonyFileParameter, settings: FinanceManagerPluginSettings): string {
 		return value.getAsset().getName() + ".md";
 	}
 
