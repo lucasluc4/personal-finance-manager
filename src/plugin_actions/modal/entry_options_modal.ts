@@ -44,7 +44,6 @@ export class EntryOptionsModal extends SuggestModal<DescriptionModalCorresponden
 
 	// Renders each suggestion item.
 	renderSuggestion(entry: DescriptionModalCorrespondence, el: HTMLElement) {
-		console.log('renderSuggestion', entry);
 		el.createEl('div', { text: entry.description });
 	}
 
