@@ -1,4 +1,4 @@
-import { App, Modal, Setting } from 'obsidian';
+import { Modal, Setting } from 'obsidian';
 import { Asset } from "src/asset/asset";
 import { PeriodPickerDecorator } from "src/general/modal_decorator/period_picker_decorator";
 import { AssetPickerDecorator } from "src/general/modal_decorator/asset_picker_decorator";
@@ -8,9 +8,11 @@ import {TransactionFileParameter} from "./transaction_file_parameter";
 import {FinanceFileCreationButtonDecorator} from "../../general/modal_decorator/finance_file_creation_button_decorator";
 import {TransactionFileSetting} from "./transaction_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class AddTransactionModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 
 		this.setTitle("Create new Transaction");
 
@@ -24,7 +26,7 @@ export class AddTransactionModal extends Modal {
 			period = newPeriod;
 		});
 
-		new AssetPickerDecorator().include(this, (newAsset) => {
+		new AssetPickerDecorator().include(this, plugin.settings, (newAsset) => {
 			asset = newAsset;
 		});
 
@@ -58,7 +60,7 @@ export class AddTransactionModal extends Modal {
 			return new TransactionFileParameter(type, asset, transactionValue, period, description);
 		}
 
-		new FinanceFileCreationButtonDecorator().include(this, getTransactionFileParameter,
-			new TransactionFileSetting(app));
+		new FinanceFileCreationButtonDecorator(plugin.settings)
+			.include(this, getTransactionFileParameter, new TransactionFileSetting(plugin.app));
 	}
 }

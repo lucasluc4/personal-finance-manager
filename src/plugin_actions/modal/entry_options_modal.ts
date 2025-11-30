@@ -1,7 +1,9 @@
-import { SuggestModal, App } from 'obsidian';
+import { SuggestModal } from 'obsidian';
 import { EntryOptionDescriptionMap } from "../entry_option_description_map";
 import { EntryModalMap } from "../entry_option_modal_map";
 import { EntryOptionType } from "../entry_option_type";
+
+import FinanceManagerPlugin from "main";
 
 class DescriptionModalCorrespondence {
 	type: EntryOptionType;
@@ -18,9 +20,9 @@ export class EntryOptionsModal extends SuggestModal<DescriptionModalCorresponden
 	private readonly _modalMap: EntryModalMap;
 	private readonly _filteredOptions: DescriptionModalCorrespondence[];
 
-	constructor(app: App) {
-		super(app);
-		this._modalMap = new EntryModalMap(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
+		this._modalMap = new EntryModalMap(plugin);
 
 		const descriptionMap = new EntryOptionDescriptionMap();
 
@@ -42,7 +44,6 @@ export class EntryOptionsModal extends SuggestModal<DescriptionModalCorresponden
 
 	// Renders each suggestion item.
 	renderSuggestion(entry: DescriptionModalCorrespondence, el: HTMLElement) {
-		console.log('renderSuggestion', entry);
 		el.createEl('div', { text: entry.description });
 	}
 

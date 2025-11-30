@@ -1,6 +1,7 @@
 import { Notice, normalizePath } from "obsidian";
 import { FinanceFileSetting } from "../../general/modal_decorator/file/finance_file_setting";
 import { AssetFileParameter } from "./asset_file_parameter";
+import { FinanceManagerPluginSettings } from "main";
 
 export class AssetFileSetting implements FinanceFileSetting<AssetFileParameter> {
 
@@ -11,12 +12,12 @@ export class AssetFileSetting implements FinanceFileSetting<AssetFileParameter> 
 			"---\n";
 	}
 
-	getFileName(value: AssetFileParameter): string {
+	getFileName(value: AssetFileParameter, settings: FinanceManagerPluginSettings): string {
 		return value.getName() + ".md";
 	}
 
-	getPath(value: AssetFileParameter): string {
-		return normalizePath("finance/assets");
+	getPath(value: AssetFileParameter, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.assetFolder);
 	}
 
 	validate(value: AssetFileParameter): boolean {

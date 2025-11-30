@@ -1,13 +1,15 @@
-import { App, Modal, Setting } from 'obsidian';
+import {  Modal, Setting } from 'obsidian';
 import { AssetTypeDescriptionMap } from "src/asset/asset_type_description_map";
 import { AssetType } from "src/asset/asset_type";
 import { FinanceFileCreationButtonDecorator } from "src/general/modal_decorator/finance_file_creation_button_decorator";
 import { AssetFileParameter } from "./asset_file_parameter";
 import { AssetFileSetting } from "./asset_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class AddAssetModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 		this.setTitle('Create new Asset');
 
 		let name = '';
@@ -40,7 +42,7 @@ export class AddAssetModal extends Modal {
 			return new AssetFileParameter(type, name);
 		}
 
-		new FinanceFileCreationButtonDecorator<AssetFileParameter>().include(this, getAssetFileParameter,
+		new FinanceFileCreationButtonDecorator<AssetFileParameter>(plugin.settings).include(this, getAssetFileParameter,
 			new AssetFileSetting());
 	}
 }

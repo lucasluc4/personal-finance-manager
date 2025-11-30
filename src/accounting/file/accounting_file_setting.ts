@@ -1,6 +1,7 @@
 import {normalizePath} from "obsidian";
 import {FinanceFileSetting} from "../../general/modal_decorator/file/finance_file_setting";
 import {Accounting} from "../accounting";
+import { FinanceManagerPluginSettings } from "main";
 
 export class AccountingFileSetting implements FinanceFileSetting<Accounting> {
 	getFileContent(value: Accounting): string {
@@ -31,12 +32,12 @@ export class AccountingFileSetting implements FinanceFileSetting<Accounting> {
 			"---\n";
 	}
 
-	getFileName(value: Accounting): string {
+	getFileName(value: Accounting, settings: FinanceManagerPluginSettings): string {
 		return value.getPeriod() + ".md";
 	}
 
-	getPath(value: Accounting): string {
-		return normalizePath("finance/accounting");
+	getPath(value: Accounting, settings: FinanceManagerPluginSettings): string {
+		return normalizePath(settings.accountingFolder);
 	}
 
 	validate(value: Accounting): boolean {

@@ -1,18 +1,19 @@
-import {App} from "obsidian";
 import {Accounting} from "./accounting";
 import {FetchAccountingFromFile} from "./file/fetch_accounting_from_file";
 import {ReserveBalance} from "./reserve_balance";
 
-export class AccountingCalculator {
-	private readonly app: App;
+import FinanceManagerPlugin from 'main';
 
-	constructor(app: App) {
-		this.app = app;
+export class AccountingCalculator {
+	private readonly plugin: FinanceManagerPlugin;
+
+	constructor(plugin: FinanceManagerPlugin) {
+		this.plugin = plugin;
 	}
 
 	calculate(period: string): Accounting {
 
-		const fetchAccounting = new FetchAccountingFromFile(this.app);
+		const fetchAccounting = new FetchAccountingFromFile(this.plugin);
 
 		const lastPeriodAccounting = fetchAccounting.fetchAccounting(this.lessOneMonth(period));
 

@@ -2,11 +2,15 @@ import { Modal, Setting, TFile, normalizePath } from 'obsidian';
 import { Asset } from "src/asset/asset";
 import { AssetType } from "src/asset/asset_type";
 
+import { FinanceManagerPluginSettings } from "main";
+
 export class AssetPickerDecorator {
 
-	include(modal: Modal, assetSetCallback: (asset: Asset) => void) {
+	include(modal: Modal, settings: FinanceManagerPluginSettings, assetSetCallback: (asset: Asset) => void) {
 		const currentAssets: Asset[] = [];
-		const folder = modal.app.vault.getFolderByPath(normalizePath("finance/assets"));
+
+		const assetsFolder = settings.assetFolder;
+		const folder = modal.app.vault.getFolderByPath(normalizePath(assetsFolder));
 		folder?.children.forEach((child) => {
 			if (child instanceof TFile && child.extension === "md") {
 				const assetFile = child as TFile;

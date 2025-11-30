@@ -1,12 +1,14 @@
-import { Notice, Plugin } from 'obsidian';
+import { Notice } from 'obsidian';
 import { EntryOptionDescriptionMap } from "../entry_option_description_map";
 import { EntryModalMap } from "../entry_option_modal_map";
 
+import FinanceManagerPlugin from "main";
+
 export class PluginActionCommandDecorator {
 
-	include(plugin: Plugin) {
+	include(plugin: FinanceManagerPlugin) {
 		const entryOptionDescriptionMap = new EntryOptionDescriptionMap();
-		const entryModalMap = new EntryModalMap(plugin.app);
+		const entryModalMap = new EntryModalMap(plugin);
 
 		entryModalMap.getRegisteredTypes().forEach(type => {
 			plugin.addCommand({

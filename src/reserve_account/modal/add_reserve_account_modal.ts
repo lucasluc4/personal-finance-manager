@@ -1,12 +1,14 @@
-import { App, Modal, Setting } from 'obsidian';
+import { Modal, Setting } from 'obsidian';
 import { FinanceFileCreationButtonDecorator } from "src/general/modal_decorator/finance_file_creation_button_decorator";
 import { ValueFieldDecorator } from "src/general/modal_decorator/value_field_decorator";
 import { ReserveAccount } from "../reserve_account";
 import { ReserveAccountFileSettings } from "./reserve_account_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class AddReserveAccountModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 		this.setTitle("Create new Reserve Account")
 
 		let name = '';
@@ -29,7 +31,7 @@ export class AddReserveAccountModal extends Modal {
 			return new ReserveAccount(name, goal, description, true);
 		}
 
-		new FinanceFileCreationButtonDecorator<ReserveAccount>().include(this, getReserveAccountParameter,
-			new ReserveAccountFileSettings());
+		new FinanceFileCreationButtonDecorator<ReserveAccount>(plugin.settings)
+			.include(this, getReserveAccountParameter, new ReserveAccountFileSettings());
 	}
 }

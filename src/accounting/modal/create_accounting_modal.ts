@@ -1,12 +1,14 @@
-import {App, Modal} from "obsidian";
+import {Modal} from "obsidian";
 import {PeriodPickerDecorator} from "../../general/modal_decorator/period_picker_decorator";
 import {AccountingCalculator} from "../accounting_calculator";
 import {FinanceFileCreationButtonDecorator} from "../../general/modal_decorator/finance_file_creation_button_decorator";
 import {AccountingFileSetting} from "../file/accounting_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class CreateAccountingModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 
 		this.setTitle("Create Accounting");
 
@@ -17,10 +19,10 @@ export class CreateAccountingModal extends Modal {
 		});
 
 		const calculateAccounting = () => {
-			return new AccountingCalculator(app).calculate(period);
+			return new AccountingCalculator(plugin).calculate(period);
 		}
 
-		new FinanceFileCreationButtonDecorator().include(this, calculateAccounting,
+		new FinanceFileCreationButtonDecorator(plugin.settings).include(this, calculateAccounting,
 			new AccountingFileSetting());
 	}
 }

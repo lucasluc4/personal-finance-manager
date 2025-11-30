@@ -1,4 +1,4 @@
-import { App, Modal } from 'obsidian';
+import { Modal } from 'obsidian';
 import { Asset } from "src/asset/asset";
 import { PeriodPickerDecorator } from "src/general/modal_decorator/period_picker_decorator";
 import { AssetPickerDecorator } from "src/general/modal_decorator/asset_picker_decorator";
@@ -7,9 +7,11 @@ import { FinanceFileCreationButtonDecorator } from "src/general/modal_decorator/
 import { PatrimonyFileParameter } from "./patrimony_file_parameter";
 import { PatrimonyFileSetting } from "./patrimony_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class AddPatrimonyModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 
 		this.setTitle('Create new Patrimony Entry');
 
@@ -21,7 +23,7 @@ export class AddPatrimonyModal extends Modal {
 			period = newPeriod;
 		});
 
-		new AssetPickerDecorator().include(this, (newAsset) => {
+		new AssetPickerDecorator().include(this, plugin.settings, (newAsset) => {
 			asset = newAsset;
 		});
 
@@ -33,6 +35,7 @@ export class AddPatrimonyModal extends Modal {
 			return new PatrimonyFileParameter(asset, period, patrimonyValue);
 		}
 
-		new FinanceFileCreationButtonDecorator().include(this, getPatrimonyFileParameter, new PatrimonyFileSetting());
+		new FinanceFileCreationButtonDecorator(plugin.settings).include(this, getPatrimonyFileParameter,
+			new PatrimonyFileSetting());
 	}
 }

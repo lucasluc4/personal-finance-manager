@@ -1,4 +1,4 @@
-import {App, Modal, normalizePath, Setting, TFile} from 'obsidian';
+import {Modal, normalizePath, Setting, TFile} from 'obsidian';
 import {ReserveAccount} from "src/reserve_account/reserve_account";
 import {ReserveTransactionType} from "../reserve_transaction_type";
 import {PeriodPickerDecorator} from "src/general/modal_decorator/period_picker_decorator";
@@ -7,9 +7,11 @@ import {FinanceFileCreationButtonDecorator} from "src/general/modal_decorator/fi
 import {ReserveTransactionFileParameter} from "./reserve_transaction_file_parameter";
 import {ReserveTransactionFileSetting} from "./reserve_transaction_file_setting";
 
+import FinanceManagerPlugin from 'main';
+
 export class AddReserveTransactionModal extends Modal {
-	constructor(app: App) {
-		super(app);
+	constructor(plugin: FinanceManagerPlugin) {
+		super(plugin.app);
 
 		this.setTitle("Create new Reserve Transaction");
 
@@ -26,7 +28,8 @@ export class AddReserveTransactionModal extends Modal {
 		const defaultReserveAccount: ReserveAccount = new ReserveAccount("Default", 0, "Default reserve account", true);
 		currentAccounts.push(defaultReserveAccount);
 
-		const folder = this.app.vault.getFolderByPath(normalizePath("finance/reserve_accounts"));
+		const reserveAccountsPath = plugin.settings.reserveAccountsFolder;
+		const folder = this.app.vault.getFolderByPath(normalizePath(reserveAccountsPath));
 		folder?.children.forEach((child) => {
 			if (child instanceof TFile && child.extension === "md") {
 				const assetFile = child as TFile;
@@ -87,7 +90,7 @@ export class AddReserveTransactionModal extends Modal {
 			return new ReserveTransactionFileParameter(reserveAccount, transactionValue, period, type);
 		};
 
-		new FinanceFileCreationButtonDecorator().include(this, getReserveTransactionFileParameter,
-			new ReserveTransactionFileSetting(app));
+		new FinanceFileCreationButtonDecorator(plugin.settings)
+			.include(this, getReserveTransactionFileParameter, new ReserveTransactionFileSetting(plugin.app));
 	}
 }
