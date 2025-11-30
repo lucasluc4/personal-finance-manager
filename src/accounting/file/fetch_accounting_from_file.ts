@@ -1,9 +1,11 @@
-import {App, TFile, normalizePath} from "obsidian";
+import {TFile, normalizePath} from "obsidian";
 import { Accounting } from "../accounting";
 import {ReserveBalance} from "../reserve_balance";
 import {AssetType} from "../../asset/asset_type";
 import {ReserveTransactionType} from "../../reserve_transaction/reserve_transaction_type";
 import {TransactionType} from "../../transaction/transaction_type";
+
+import FinanceManagerPlugin from 'main';
 
 export class PatrimonyResult {
 	private readonly totalRealEstatePatrimony: number;
@@ -48,19 +50,20 @@ export class TransactionResult {
 }
 
 export class FetchAccountingFromFile {
-	private readonly app: App;
+	private readonly plugin: FinanceManagerPlugin;
 
-	constructor(app: App) {
-		this.app = app;
+	constructor(plugin: FinanceManagerPlugin) {
+		this.plugin = plugin;
 	}
 
 	fetchAccounting(period: string): Accounting | null {
-		const file = this.app.vault.getFileByPath(normalizePath("finance/accounting/" + period + ".md"));
+		const accountingPath = this.plugin.settings.accountingFolder;
+		const file = this.plugin.app.vault.getFileByPath(normalizePath(accountingPath + "/" + period + ".md"));
 		if (!file) {
 			return null;
 		}
 
-		const frontmatter = this.app.metadataCache.getFileCache(file)?.frontmatter;
+		const frontmatter = this.plugin.app.metadataCache.getFileCache(file)?.frontmatter;
 		if (!frontmatter) {
 			return null;
 		}
@@ -93,8 +96,9 @@ export class FetchAccountingFromFile {
 	}
 
 	fetchPatrimony(period: string): PatrimonyResult {
-		const folder = this.app.vault.getFolderByPath(
-			normalizePath("finance/patrimony/" + period.replace("-", "/")));
+		const patrimonyPath = this.plugin.settings.accountingFolder;
+		const folder = this.plugin.app.vault.getFolderByPath(
+			normalizePath(patrimonyPath + "/" + period.replace("-", "/")));
 
 		let totalRealEstatePatrimony = 0;
 		let totalDepositPatrimony = 0;
@@ -105,16 +109,19 @@ export class FetchAccountingFromFile {
 				if (child instanceof TFile && child.extension === "md") {
 					const patrimonyFile = child as TFile;
 
-					const patrimonyFrontmatter = this.app.metadataCache.getFileCache(patrimonyFile)?.frontmatter;
+					const patrimonyFrontmatter =
+						this.plugin.app.metadataCache.getFileCache(patrimonyFile)?.frontmatter;
 					if (patrimonyFrontmatter) {
 
 						const patrimonyValue = patrimonyFrontmatter.Value;
 						let assetType = AssetType.DepositAccount;
 
-						const assetFile = this.app.vault.getFileByPath(
-							normalizePath("finance/assets/" + patrimonyFile.basename + ".md"));
+						const assetsFolder = this.plugin.settings.assetFolder;
+						const assetFile = this.plugin.app.vault.getFileByPath(
+							normalizePath(assetsFolder + "/" + patrimonyFile.basename + ".md"));
 						if (assetFile) {
-							const assetFrontmatter = this.app.metadataCache.getFileCache(assetFile)?.frontmatter;
+							const assetFrontmatter =
+								this.plugin.app.metadataCache.getFileCache(assetFile)?.frontmatter;
 							if (assetFrontmatter) {
 								if (assetFrontmatter.Type) {
 									assetType = assetFrontmatter.Type as AssetType;
@@ -140,14 +147,16 @@ export class FetchAccountingFromFile {
 	fetchReserveTransactions(period: string): Map<string, number> {
 		const map = new Map<string, number>();
 
-		const folder = this.app.vault.getFolderByPath(
-			normalizePath("finance/reserve_transaction/" + period.replace("-", "/")));
+		const reserveTransactionsFolder = this.plugin.settings.reserveTransactionFolder;
+		const folder = this.plugin.app.vault.getFolderByPath(
+			normalizePath(reserveTransactionsFolder + "/" + period.replace("-", "/")));
 		if (folder) {
 			folder.children.forEach((child) => {
 				if (child instanceof TFile && child.extension === "md") {
 					const transactionFile = child as TFile;
 
-					const transactionFrontmatter = this.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
+					const transactionFrontmatter =
+						this.plugin.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
 					if (transactionFrontmatter) {
 						const value = transactionFrontmatter.Type === ReserveTransactionType.Withdraw ?
 							(transactionFrontmatter.Value * (-1)) : transactionFrontmatter.Value ;
@@ -171,14 +180,16 @@ export class FetchAccountingFromFile {
 		let totalInvestmentDeposit = 0;
 		let totalIncome = 0;
 
-		const folder = this.app.vault.getFolderByPath(
-			normalizePath("finance/transaction/" + period.replace("-", "/")));
+		const transactionsFolder = this.plugin.settings.transactionsFolder;
+		const folder = this.plugin.app.vault.getFolderByPath(
+			normalizePath(transactionsFolder + "/" + period.replace("-", "/")));
 		if (folder) {
 			folder.children.forEach((child) => {
 				if (child instanceof TFile && child.extension === "md") {
 					const transactionFile = child as TFile;
 
-					const transactionFrontmatter = this.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
+					const transactionFrontmatter =
+						this.plugin.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
 					if (transactionFrontmatter) {
 
 						if (transactionFrontmatter.Type === TransactionType.Salary
@@ -188,10 +199,12 @@ export class FetchAccountingFromFile {
 							let assetType = AssetType.DepositAccount;
 
 							const assetName = transactionFrontmatter.Asset as string;
-							const assetFile = this.app.vault.getFileByPath(
-								normalizePath("finance/assets/" + assetName + ".md"));
+							const assetsFolder = this.plugin.settings.assetFolder;
+							const assetFile = this.plugin.app.vault.getFileByPath(
+								normalizePath(assetsFolder + "/" + assetName + ".md"));
 							if (assetFile) {
-								const assetFrontmatter = this.app.metadataCache.getFileCache(assetFile)?.frontmatter;
+								const assetFrontmatter =
+									this.plugin.app.metadataCache.getFileCache(assetFile)?.frontmatter;
 								if (assetFrontmatter) {
 									const fileAssetType = assetFrontmatter.Type as AssetType;
 									if (fileAssetType) {
