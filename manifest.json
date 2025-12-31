@@ -3,7 +3,7 @@
 	"name": "Personal Finance Manager",
 	"version": "0.0.6",
 	"minAppVersion": "0.15.0",
-	"description": "Plugin for a personal financial management framework.",
+	"description": "Helps you to manage your personal finances, by creating local .md files with financial information.",
 	"author": "Lucas Maia",
 	"authorUrl": "https://lucasmaia.dev",
 	"isDesktopOnly": true
