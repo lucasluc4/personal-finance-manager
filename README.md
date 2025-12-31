@@ -1,4 +1,23 @@
-# Obsidian Sample Plugin
+# Personal Finance Manager Obsidian Plugin
+
+This plugin was created using the Obsidian Sample Plugin (https://github.com/obsidianmd/obsidian-sample-plugin).
+
+You may refer to Obsidian Developer Docs to help you develop more features on top of this codebase.
+
+## Documentation
+
+I have written a small base documentation explaining how to use this plugin in my blog: https://www.lucasmaia.dev/post/personal-finance-manager-obsidian-plugin/
+
+## How to contribute
+
+I didn't prepare proper "How to Contribute" instructions, but feel free to get in touch by e-mail: contato@lucasmaia.dev
+
+## How to install
+
+If this plugin is not yet published in Obsidian community plugins, or if you want to try beta versions, you may use the
+Obsidian BRAT plugin available at: https://github.com/TfTHacker/obsidian42-brat
+
+<!-- # Obsidian Sample Plugin
 
 This is a sample plugin for Obsidian (https://obsidian.md).
 
@@ -91,4 +110,4 @@ If you have multiple URLs, you can also do:
 
 ## API Documentation
 
-See https://github.com/obsidianmd/obsidian-api
+See https://github.com/obsidianmd/obsidian-api -->
