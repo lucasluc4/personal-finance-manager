@@ -16,7 +16,7 @@ export interface FinanceManagerPluginSettings {
 }
 
 const DEFAULT_SETTINGS: FinanceManagerPluginSettings = {
-	language: 'english',
+	language: 'English',
 	assetFolder: normalizePath('finance/assets'),
 	patrimonyFolder: normalizePath('finance/patrimony'),
 	transactionsFolder: normalizePath('finance/transactions'),
@@ -77,9 +77,9 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Language')
-			.setDesc("This sets the language in modals and commands but won't change field names in generated files. After changing the language, it is recommended to reload the obsidian app.")
+			.setDesc("This sets the language in modals and commands but will not change field names in generated files. After changing the language, it is recommended to reload the Obsidian app.")
 			.addDropdown(dropdown => dropdown
-				.addOption("english", "english")
+				.addOption("English", "English")
 				.setValue(this.plugin.settings.language)
 				.onChange(async (value) => {
 					this.plugin.settings.language = value;
@@ -95,7 +95,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.assetFolder = value || DEFAULT_SETTINGS.assetFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.assetFolder);
@@ -114,7 +114,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.patrimonyFolder = value || DEFAULT_SETTINGS.patrimonyFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.patrimonyFolder);
@@ -133,7 +133,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.transactionsFolder = value || DEFAULT_SETTINGS.transactionsFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.transactionsFolder);
@@ -152,7 +152,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.reserveAccountsFolder = value || DEFAULT_SETTINGS.reserveAccountsFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.reserveAccountsFolder);
@@ -171,7 +171,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.reserveTransactionFolder = value || DEFAULT_SETTINGS.reserveTransactionFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.reserveTransactionFolder);
@@ -190,7 +190,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.accountingFolder = value || DEFAULT_SETTINGS.accountingFolder;
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.accountingFolder);

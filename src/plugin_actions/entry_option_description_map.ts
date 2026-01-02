@@ -5,12 +5,12 @@ export class EntryOptionDescriptionMap {
 
 	constructor() {
 		this.entryOptionDescriptionMap = new Map();
-		this.entryOptionDescriptionMap.set(EntryOptionType.AddAsset, 'Create new Asset');
-		this.entryOptionDescriptionMap.set(EntryOptionType.AddPatrimony, 'Create new Patrimony entry');
-		this.entryOptionDescriptionMap.set(EntryOptionType.AddTransaction, 'Create new Transaction');
-		this.entryOptionDescriptionMap.set(EntryOptionType.AddReserveAccount, 'Create new Reserve Account');
-		this.entryOptionDescriptionMap.set(EntryOptionType.AddReserveTransaction, 'Create new Reserve Transaction');
-		this.entryOptionDescriptionMap.set(EntryOptionType.CreateAccounting, 'Create new Accounting');
+		this.entryOptionDescriptionMap.set(EntryOptionType.AddAsset, 'Create new asset');
+		this.entryOptionDescriptionMap.set(EntryOptionType.AddPatrimony, 'Create new patrimony entry');
+		this.entryOptionDescriptionMap.set(EntryOptionType.AddTransaction, 'Create new transaction');
+		this.entryOptionDescriptionMap.set(EntryOptionType.AddReserveAccount, 'Create new reserve account');
+		this.entryOptionDescriptionMap.set(EntryOptionType.AddReserveTransaction, 'Create new reserve transaction');
+		this.entryOptionDescriptionMap.set(EntryOptionType.CreateAccounting, 'Create new accounting');
 	}
 
 	getDescription(entryOptionType: EntryOptionType): string {
