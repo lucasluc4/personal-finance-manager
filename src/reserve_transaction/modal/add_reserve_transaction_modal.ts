@@ -13,7 +13,7 @@ export class AddReserveTransactionModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
 
-		this.setTitle("Create new Reserve Transaction");
+		this.setTitle("Create new reserve transaction");
 
 		let reserveAccount: ReserveAccount;
 		let period: string;
@@ -32,15 +32,14 @@ export class AddReserveTransactionModal extends Modal {
 		const folder = this.app.vault.getFolderByPath(normalizePath(reserveAccountsPath));
 		folder?.children.forEach((child) => {
 			if (child instanceof TFile && child.extension === "md") {
-				const assetFile = child as TFile;
-				const frontmatter = this.app.metadataCache.getFileCache(assetFile)?.frontmatter;
+				const frontmatter = this.app.metadataCache.getFileCache(child)?.frontmatter;
 
 				if (frontmatter) {
 					try {
 						const active = frontmatter.Active as boolean;
 						const goal = frontmatter.Goal as number;
 
-						currentAccounts.push(new ReserveAccount(assetFile.basename, goal, '', active));
+						currentAccounts.push(new ReserveAccount(child.basename, goal, '', active));
 					} catch (e) {
 						console.error(e);
 					}
@@ -49,7 +48,7 @@ export class AddReserveTransactionModal extends Modal {
 		});
 
 		new Setting(this.contentEl)
-			.setName('Reserve Account')
+			.setName('Reserve account')
 			.addDropdown((dropdown) => {
 				currentAccounts.forEach((currentAccount) => {
 					if (currentAccount.isActive()) {

@@ -9,7 +9,7 @@ import FinanceManagerPlugin from 'main';
 export class AddReserveAccountModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
-		this.setTitle("Create new Reserve Account")
+		this.setTitle("Create new reserve account")
 
 		let name = '';
 		let goal = 0;

@@ -10,7 +10,7 @@ import FinanceManagerPlugin from 'main';
 export class AddAssetModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
-		this.setTitle('Create new Asset');
+		this.setTitle('Create new asset');
 
 		let name = '';
 		let type: AssetType = AssetType.DepositAccount;
@@ -25,7 +25,7 @@ export class AddAssetModal extends Modal {
 				}));
 
 		new Setting(this.contentEl)
-			.setName('Asset Type')
+			.setName('Asset type')
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOption(AssetType.DepositAccount,

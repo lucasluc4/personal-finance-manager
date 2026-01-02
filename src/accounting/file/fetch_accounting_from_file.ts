@@ -107,10 +107,8 @@ export class FetchAccountingFromFile {
 		if (folder) {
 			folder.children.forEach((child) => {
 				if (child instanceof TFile && child.extension === "md") {
-					const patrimonyFile = child as TFile;
-
 					const patrimonyFrontmatter =
-						this.plugin.app.metadataCache.getFileCache(patrimonyFile)?.frontmatter;
+						this.plugin.app.metadataCache.getFileCache(child)?.frontmatter;
 					if (patrimonyFrontmatter) {
 
 						const patrimonyValue = patrimonyFrontmatter.Value;
@@ -118,7 +116,7 @@ export class FetchAccountingFromFile {
 
 						const assetsFolder = this.plugin.settings.assetFolder;
 						const assetFile = this.plugin.app.vault.getFileByPath(
-							normalizePath(assetsFolder + "/" + patrimonyFile.basename + ".md"));
+							normalizePath(assetsFolder + "/" + child.basename + ".md"));
 						if (assetFile) {
 							const assetFrontmatter =
 								this.plugin.app.metadataCache.getFileCache(assetFile)?.frontmatter;
@@ -153,10 +151,8 @@ export class FetchAccountingFromFile {
 		if (folder) {
 			folder.children.forEach((child) => {
 				if (child instanceof TFile && child.extension === "md") {
-					const transactionFile = child as TFile;
-
 					const transactionFrontmatter =
-						this.plugin.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
+						this.plugin.app.metadataCache.getFileCache(child)?.frontmatter;
 					if (transactionFrontmatter) {
 						const value = transactionFrontmatter.Type === ReserveTransactionType.Withdraw ?
 							(transactionFrontmatter.Value * (-1)) : transactionFrontmatter.Value ;
@@ -186,10 +182,8 @@ export class FetchAccountingFromFile {
 		if (folder) {
 			folder.children.forEach((child) => {
 				if (child instanceof TFile && child.extension === "md") {
-					const transactionFile = child as TFile;
-
 					const transactionFrontmatter =
-						this.plugin.app.metadataCache.getFileCache(transactionFile)?.frontmatter;
+						this.plugin.app.metadataCache.getFileCache(child)?.frontmatter;
 					if (transactionFrontmatter) {
 
 						if (transactionFrontmatter.Type === TransactionType.Salary

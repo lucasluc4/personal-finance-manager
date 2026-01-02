@@ -39,7 +39,7 @@ export class FinanceFileCreationButtonDecorator<K> {
 
 							const file = await modal.app.vault.create(filePath, fileContent);
 							await modal.app.workspace.getLeaf(false).openFile(file);
-						} catch (e) {
+						} catch {
 							new Notice('An error occurred while creating new register. ' +
 								'Check if file ' + filePath + ' already exists.');
 							return;

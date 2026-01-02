@@ -115,11 +115,10 @@ export class AccountingCalculator {
 
 		if (lastPeriodAccounting && lastPeriodAccounting.getReserveBalance()) {
 			lastPeriodAccounting.getReserveBalance().forEach((item) => {
-				const balance = item as ReserveBalance;
-				const transactionDiff = reserveTransactions.get(balance.reserveAccountName) || 0;
-				reserveBalance.push(new ReserveBalance(balance.reserveAccountName,
-					balance.balance + transactionDiff));
-				alreadyCalculatedAccount.set(balance.reserveAccountName, true);
+				const transactionDiff = reserveTransactions.get(item.reserveAccountName) || 0;
+				reserveBalance.push(new ReserveBalance(item.reserveAccountName,
+					item.balance + transactionDiff));
+				alreadyCalculatedAccount.set(item.reserveAccountName, true);
 			});
 		}
 

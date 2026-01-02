@@ -13,15 +13,14 @@ export class AssetPickerDecorator {
 		const folder = modal.app.vault.getFolderByPath(normalizePath(assetsFolder));
 		folder?.children.forEach((child) => {
 			if (child instanceof TFile && child.extension === "md") {
-				const assetFile = child as TFile;
-				const frontmatter = modal.app.metadataCache.getFileCache(assetFile)?.frontmatter;
+				const frontmatter = modal.app.metadataCache.getFileCache(child)?.frontmatter;
 
 				if (frontmatter) {
 					try {
 						const active = frontmatter.Active as boolean;
 						const assetType = frontmatter.Type as AssetType;
 
-						currentAssets.push(new Asset(assetType, assetFile.basename, active));
+						currentAssets.push(new Asset(assetType, child.basename, active));
 					} catch (e) {
 						console.error(e);
 					}
