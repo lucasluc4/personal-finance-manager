@@ -16,7 +16,7 @@ export interface FinanceManagerPluginSettings {
 }
 
 const DEFAULT_SETTINGS: FinanceManagerPluginSettings = {
-	language: 'en-US',
+	language: 'english',
 	assetFolder: normalizePath('finance/assets'),
 	patrimonyFolder: normalizePath('finance/patrimony'),
 	transactionsFolder: normalizePath('finance/transactions'),
