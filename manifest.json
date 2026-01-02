@@ -1,7 +1,7 @@
 {
 	"id": "personal-finance-manager",
 	"name": "Personal Finance Manager",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"minAppVersion": "0.15.0",
 	"description": "Helps you to manage your personal finances, by creating local .md files with financial information.",
 	"author": "Lucas Maia",
