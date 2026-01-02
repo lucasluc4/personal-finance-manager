@@ -92,10 +92,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.assetFolder + ". After changing this path or any of the paths below, it is necessary to manually move all existing files in the old folder to the new one. Otherwise, the plugin will lost track of not migrated entries.")
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.assetFolder = value || DEFAULT_SETTINGS.assetFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.assetFolder);
@@ -111,10 +111,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.patrimonyFolder)
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.patrimonyFolder = value || DEFAULT_SETTINGS.patrimonyFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.patrimonyFolder);
@@ -130,10 +130,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.transactionsFolder)
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.transactionsFolder = value || DEFAULT_SETTINGS.transactionsFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.transactionsFolder);
@@ -149,10 +149,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveAccountsFolder)
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.reserveAccountsFolder = value || DEFAULT_SETTINGS.reserveAccountsFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.reserveAccountsFolder);
@@ -168,10 +168,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveTransactionFolder)
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.reserveTransactionFolder = value || DEFAULT_SETTINGS.reserveTransactionFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.reserveTransactionFolder);
@@ -187,10 +187,10 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.accountingFolder)
 			.addText(text => {
 
-				new FolderSuggest(text.inputEl, this.app, async (value) => {
+				new FolderSuggest(text.inputEl, this.app, (value) => {
 					text.setValue(value);
 					this.plugin.settings.accountingFolder = value || DEFAULT_SETTINGS.accountingFolder;
-					await this.plugin.saveSettings();
+					this.plugin.saveSettings();
 				});
 
 				text.setValue(this.plugin.settings.accountingFolder);
