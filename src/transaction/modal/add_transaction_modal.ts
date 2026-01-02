@@ -14,7 +14,7 @@ export class AddTransactionModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
 
-		this.setTitle("Create new Transaction");
+		this.setTitle("Create new transaction");
 
 		let asset: Asset;
 		let period: string;

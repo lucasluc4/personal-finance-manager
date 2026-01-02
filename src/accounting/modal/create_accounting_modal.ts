@@ -10,7 +10,7 @@ export class CreateAccountingModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
 
-		this.setTitle("Create Accounting");
+		this.setTitle("Create accounting");
 
 		let period: string;
 

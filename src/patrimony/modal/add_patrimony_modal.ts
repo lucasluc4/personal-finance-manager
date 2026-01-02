@@ -13,7 +13,7 @@ export class AddPatrimonyModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
 
-		this.setTitle('Create new Patrimony Entry');
+		this.setTitle('Create new patrimony entry');
 
 		let asset: Asset;
 		let period: string;

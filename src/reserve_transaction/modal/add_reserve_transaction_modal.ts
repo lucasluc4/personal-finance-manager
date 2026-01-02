@@ -13,7 +13,7 @@ export class AddReserveTransactionModal extends Modal {
 	constructor(plugin: FinanceManagerPlugin) {
 		super(plugin.app);
 
-		this.setTitle("Create new Reserve Transaction");
+		this.setTitle("Create new reserve transaction");
 
 		let reserveAccount: ReserveAccount;
 		let period: string;
@@ -48,7 +48,7 @@ export class AddReserveTransactionModal extends Modal {
 		});
 
 		new Setting(this.contentEl)
-			.setName('Reserve Account')
+			.setName('Reserve account')
 			.addDropdown((dropdown) => {
 				currentAccounts.forEach((currentAccount) => {
 					if (currentAccount.isActive()) {

@@ -77,9 +77,9 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Language')
-			.setDesc("This sets the language in Modals and Commands but won't change field names in generated files. After changing the language, it is recommended to reload the obsidian app.")
+			.setDesc("This sets the language in modals and commands but won't change field names in generated files. After changing the language, it is recommended to reload the obsidian app.")
 			.addDropdown(dropdown => dropdown
-				.addOption("en-US", "en-US")
+				.addOption("english", "english")
 				.setValue(this.plugin.settings.language)
 				.onChange(async (value) => {
 					this.plugin.settings.language = value;
@@ -145,7 +145,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('Reserve Accounts folder')
+			.setName('Reserve accounts folder')
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveAccountsFolder)
 			.addText(text => {
 
@@ -164,7 +164,7 @@ class PersonalFinanceSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('Reserve Transactions folder')
+			.setName('Reserve transactions folder')
 			.setDesc("Default folder is " + DEFAULT_SETTINGS.reserveTransactionFolder)
 			.addText(text => {
 
