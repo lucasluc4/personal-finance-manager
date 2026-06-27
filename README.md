@@ -8,6 +8,8 @@ You may refer to Obsidian Developer Docs to help you develop more features on to
 
 I have written a small base documentation explaining how to use this plugin in my blog: https://www.lucasmaia.dev/post/personal-finance-manager-obsidian-plugin/
 
+For a breakdown of how each accounting metric is calculated, see [docs/accounting_metrics.md](docs/accounting_metrics.md).
+
 ## How to contribute
 
 I didn't prepare proper "How to Contribute" instructions, but feel free to get in touch by e-mail: contato@lucasmaia.dev
